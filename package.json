@@ -1,0 +1,26 @@
+{
+  "name": "@totvs/thf-cli",
+  "version": "0.0.1-beta",
+  "description": "CLI",
+  "repository": "github:totvs/thf-cli",
+  "bin": {
+    "thf": "bin/cli.js"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "TOTVS",
+  "license": "MIT",
+  "dependencies": {
+    "chalk": "2.4.2",
+    "commander": "2.9.0",
+    "cross-spawn": "6.0.5",
+    "del": "3.0.0",
+    "figlet": "1.2.1",
+    "handlebars": "4.0.12",
+    "inquirer": "6.2.1",
+    "mkdirp": "0.5.1",
+    "pify": "4.0.1",
+    "shelljs": "0.8.3"
+  }
+}
