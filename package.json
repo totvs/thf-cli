@@ -1,6 +1,6 @@
 {
   "name": "@totvs/thf-cli",
-  "version": "0.0.1-beta.1",
+  "version": "0.0.1-beta.2",
   "description": "CLI",
   "repository": "github:totvs/thf-cli",
   "bin": {
@@ -21,6 +21,7 @@
     "inquirer": "6.2.1",
     "mkdirp": "0.5.1",
     "pify": "4.0.1",
+    "replace-in-file": "3.4.2",
     "shelljs": "0.8.3"
   }
 }

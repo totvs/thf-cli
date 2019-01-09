@@ -8,6 +8,12 @@ const del = require('del');
 const build = require('../build');
 const rewrite = require('../rewrite');
 
+const overwritePrompt = (projectName) => ({
+  type: 'confirm',
+  name: 'overwrite',
+  message: `There is already a project called "${projectName}", do you want to overwrite it?`
+});
+
 async function newc(projectName, options) {
   let { template, title } = options;
 
@@ -44,10 +50,12 @@ async function newc(projectName, options) {
       cd(projectName);
 
       await pify(childProcess.exec)(`git remote rm origin`);
+      await pify(childProcess.exec)(`git init`);
 
-      await rewrite.packageJson(`${destination}/package.json`, projectName);
-
-      rewrite.projectTitle(`${destination}/src/app/app.component.html`, title)
+      _updateProject(destination, projectName, title);
+      
+      await pify(childProcess.exec)(`git add .`);
+      await pify(childProcess.exec)(`git commit -m "first commit"`);
      
       await build.installPackages();
 
@@ -69,12 +77,11 @@ async function newc(projectName, options) {
   }
 }
 
-const overwritePrompt = (projectName) => ({
-  type: 'confirm',
-  name: 'overwrite',
-  message: `There is already a project called "${projectName}", do you want to overwrite it?`
-});
-
+async function _updateProject(destination, projectName, title) {
+  await rewrite.packageJson(`${destination}/package.json`, projectName);
+  await rewrite.projectTitle(`${destination}/src/app/app.component.html`, title)
+  await rewrite.projectName(destination, projectName);
+}
 
 function _getEndpoint(template) {
   let repository = _getTemplateUrl(template);
