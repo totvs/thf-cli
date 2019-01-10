@@ -21,7 +21,7 @@ class Generate {
     ]
   })
   export class {{moduleName}}RoutingModule { }
-  `;
+`;
 
     const params = {
       routesName: `${moduleName.toLowerCase()}Routes`,
@@ -80,7 +80,7 @@ export class {{moduleName}}Module { }
     service = '{{service}}';
 
   }
-  `;
+`;
 
     return this._generateTemplateSource(componentSource, { name: fileName, component: moduleName, service });
   }
