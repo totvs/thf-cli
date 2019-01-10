@@ -1,6 +1,6 @@
 {
   "name": "@totvs/thf-cli",
-  "version": "0.0.1-beta.4",
+  "version": "3.0.0",
   "description": "CLI",
   "repository": "github:totvs/thf-cli",
   "bin": {
