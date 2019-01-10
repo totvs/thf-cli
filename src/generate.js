@@ -4,23 +4,23 @@ class Generate {
 
   routingModuleSource(fileName, moduleName, component) {
     const routingModuleSource = `import { NgModule } from '@angular/core';
-  import { Routes, RouterModule } from '@angular/router';
+import { Routes, RouterModule } from '@angular/router';
 
-  import { {{moduleName}}Component } from './{{fileName}}.component';
+import { {{moduleName}}Component } from './{{fileName}}.component';
 
-  export const {{routesName}}: Routes = [
-    { path: '', component: {{moduleName}}Component }
-  ];
+export const {{routesName}}: Routes = [
+  { path: '', component: {{moduleName}}Component }
+];
 
-  @NgModule({
-    imports: [
-      RouterModule.forChild({{routesName}})
-    ],
-    exports: [
-      RouterModule
-    ]
-  })
-  export class {{moduleName}}RoutingModule { }
+@NgModule({
+  imports: [
+    RouterModule.forChild({{routesName}})
+  ],
+  exports: [
+    RouterModule
+  ]
+})
+export class {{moduleName}}RoutingModule { }
 `;
 
     const params = {
@@ -71,15 +71,15 @@ export class {{moduleName}}Module { }
   componentSource(fileName, moduleName, service) {
     const componentSource = `import { Component } from '@angular/core';
 
-  @Component({
-    selector: 'app-{{name}}',
-    templateUrl: './{{name}}.component.html'
-  })
-  export class {{component}}Component {
+@Component({
+  selector: 'app-{{name}}',
+  templateUrl: './{{name}}.component.html'
+})
+export class {{component}}Component {
 
-    service = '{{service}}';
+  service = '{{service}}';
 
-  }
+}
 `;
 
     return this._generateTemplateSource(componentSource, { name: fileName, component: moduleName, service });
