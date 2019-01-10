@@ -3,4 +3,4 @@
 
 Official release of the package!
 
-See [README](/README.MD) for more details.
+See [README](/README.md) for more details.
