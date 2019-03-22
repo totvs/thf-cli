@@ -11,7 +11,7 @@ class Build {
       let args;
 
       if (packageName) {
-        args = ['install', '--save', `${packageName}`];
+        args = ['install', '--save-exact', `${packageName}`];
       } else {
         args = ['install'];
       }

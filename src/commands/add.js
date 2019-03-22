@@ -25,7 +25,14 @@ async function add(moduleName) {
 
   try {
 
-    await build.installPackages('@totvs/thf-templates');
+    const packageJson = _getPackageJson();
+
+    if (!_containsTemplatesPackage(packageJson)) {
+      const thfVersion = await _getThfVersion(packageJson);
+      const version = thfVersion ? `${thfVersion}` : 'latest';
+
+      await build.installPackages(`@totvs/thf-templates@${version}`);
+    }
 
     fileWriter.config(moduleName);
 
@@ -37,6 +44,18 @@ async function add(moduleName) {
   } catch (e) {
     console.log(chalk.red('There was an error in generating the files'), e);
   }
+}
+
+function _containsTemplatesPackage(packageJson) {
+  return packageJson['dependencies']['@totvs/thf-templates'];
+}
+
+function _getPackageJson() {
+  return require(`${process.cwd()}\\package.json`);
+}
+
+function _getThfVersion(packageJson) {
+  return packageJson['dependencies']['@totvs/thf-ui'];
 }
 
 module.exports = add
