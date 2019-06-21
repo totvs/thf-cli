@@ -30,4 +30,15 @@ program
     command.add(moduleName);
   });
 
+program
+  .command('convert-imports')
+  .alias('ci')
+  .description('convert imports from THF 3 to THF 4')
+  .action(() => {
+    const path = process.cwd();
+    const srcPath = pathNode.join(path, 'src');
+
+    command.convertImports(srcPath);
+  });
+
 program.parse(process.argv);
