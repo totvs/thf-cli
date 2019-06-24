@@ -1,5 +1,6 @@
 #!/usr/bin/env node
 require('shelljs/global');
+const pathNode = require('path');
 
 const program = require('commander');
 const command = require('../src/commands');

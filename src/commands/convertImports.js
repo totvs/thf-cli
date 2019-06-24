@@ -1,39 +1,71 @@
+const chalk = require('chalk');
 const fileSystem = require('fs');
+const pathNode = require('path');
 
-function convertImports(srcPath) {
+function convertImports(directory) {
 
   const files = fileSystem.readdirSync(directory);
 
   for (let i=0; i < files.length; i++) {
-    // path.step recupera o separador específico do SO
-    const file = `${directory}${path.sep}${files[i]}`;
+    // pathNode.step recupera o separador específico do SO
+    const file = `${directory}${pathNode.sep}${files[i]}`;
 
-    if((/(\.(gif|jpg|jpeg|tiff|png|ico|git))|(node_modules)$/i).test(file)) {
+    if((/node_modules$/i).test(file)) {
       continue;
     }
 
     const stats = fileSystem.statSync(file);
 
-    if(stats.isFile()) {
+    if(stats.isFile() && (/\.(ts)$/i).test(file)) {
       convertFileImport(file);
 
     } else if(stats.isDirectory()) {
-      convertDirectory(file);
+      convertImports(file);
     }
   }
 
 }
 
 function convertFileImport(file) {
+  const fileData = getFileSync(file);
+  const lines = fileData.split(/\n/);
+  const importPrefix = '@totvs/thf-';
 
+  const newLines = lines.map(line => {
+    if (line.includes(importPrefix)) {
+      const regexResult = line.match(/('|")(@totvs\/thf-(ui|storage|templates|sync)\/(.*?))('|")/);
+
+      if (regexResult) {
+        const word = regexResult[2];
+        const thfProject = `@totvs/thf-${regexResult[3]}`;
+        return line.replace(word, thfProject);
+      }
+    }
+
+    return line;
+  });
+
+  const newDataFile = newLines.join('\n');
+
+  if (fileData !== newDataFile) {
+    onUpdate(file);
+  }
+
+  writeFileSync(file, newDataFile);
 }
 
 function getFileSync(fileName) {
-  return JSON.parse(fileSystem.readFileSync(fileName, 'utf-8'));
+  return fileSystem.readFileSync(fileName, 'utf-8');
 }
 
 function writeFileSync(fileName, data) {
   fileSystem.writeFileSync(fileName, data);
 }
 
-module.exports = { convertImports };
+function onUpdate(filePath) {
+  if (filePath) {
+    console.log(chalk.green('ATUALIZADO: '), filePath);
+  }
+}
+
+module.exports = convertImports;
