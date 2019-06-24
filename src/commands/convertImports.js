@@ -33,7 +33,7 @@ function convertFileImport(file) {
 
   const newLines = lines.map(line => {
     if (line.includes(importPrefix)) {
-      const regexResult = line.match(/('|")(@totvs\/thf-(ui|storage|templates|sync)\/(.*?))('|")/);
+      const regexResult = line.match(/('|")(@totvs\/thf-(ui|storage|kendo|code\-editor|templates|sync)\/(.*?))('|")/);
 
       if (regexResult) {
         const word = regexResult[2];
