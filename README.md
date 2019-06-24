@@ -39,6 +39,7 @@ Command | Alias | Description
 --- | --- | ---
 *[add](#add)* | a | Add a module that has a dynamic component of your choice.
 *[new](#new)* | n | Creates a new project based in a template.
+*[convert-imports](#convert-imports)* | ci | Converts imports from THF version 3 to THF version 4.
 
 ```
 thf add <newComponentName>
@@ -46,6 +47,11 @@ thf add <newComponentName>
 
 ```
 thf new <projectName>
+```
+
+
+```
+thf convert-imports
 ```
 
 ### add
@@ -117,6 +123,24 @@ The informed value in this option will be used by the `thf-toolbar` title, if yo
 ```
 thf new <projectName> --title <title>
 ```
+
+### convert-imports
+
+New version of THF 4 has a new and easier way to import components. Now all you need is the project name.
+
+For example this:
+
+```
+import { ThfPageLogin } from '@totvs/thf-templates/components/thf-page-login';
+```
+
+Is now is changed to:
+
+```
+import { ThfPageLogin } from '@totvs/thf-templates';
+```
+
+Using this command in your project Angular or Ionic folder changes those imports automatically.
 
 ### Add Git remote repository
 
