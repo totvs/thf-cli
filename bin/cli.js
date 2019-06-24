@@ -1,5 +1,6 @@
 #!/usr/bin/env node
 require('shelljs/global');
+const pathNode = require('path');
 
 const program = require('commander');
 const command = require('../src/commands');
@@ -28,6 +29,17 @@ program
   .description('add new module with dynamic component in project')
   .action((moduleName) => {
     command.add(moduleName);
+  });
+
+program
+  .command('convert-imports')
+  .alias('ci')
+  .description('convert imports from THF 3 to THF 4')
+  .action(() => {
+    const path = process.cwd();
+    const srcPath = pathNode.join(path, 'src');
+
+    command.convertImports(srcPath);
   });
 
 program.parse(process.argv);
