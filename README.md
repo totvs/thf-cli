@@ -142,6 +142,10 @@ import { ThfPageLogin } from '@totvs/thf-templates';
 
 Using this command in your project Angular or Ionic folder changes those imports automatically.
 
+```
+thf convert-imports
+```
+
 ### Add Git remote repository
 
 To add a remote repository to your new project, run in folder project the command:
