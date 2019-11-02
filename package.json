@@ -17,7 +17,7 @@
     "cross-spawn": "6.0.5",
     "del": "3.0.0",
     "figlet": "1.2.1",
-    "handlebars": "4.0.12",
+    "handlebars": "4.5.1",
     "inquirer": "6.2.1",
     "mkdirp": "0.5.1",
     "pify": "4.0.1",
